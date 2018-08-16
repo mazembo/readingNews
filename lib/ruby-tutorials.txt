@@ -1,0 +1,4 @@
+https://www.toptal.com/ruby/api-with-sinatra-and-sequel-ruby-tutorial
+https://www.toptal.com/ruby/grape-gem-tutorial-how-to-build-a-rest-like-api-in-ruby
+https://www.toptal.com/ruby
+https://www.toptal.com/ruby-on-rails#hiring-guide 

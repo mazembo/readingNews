@@ -1,0 +1,15 @@
+<<<<<<< HEAD
+development:
+  clients:
+    default:
+      database: articles
+      hosts:
+        - localhost:27017
+=======
+development:
+  clients:
+    default:
+      database: articles
+      hosts:
+        - localhost:27017
+>>>>>>> sinatra stuff and docker scripts

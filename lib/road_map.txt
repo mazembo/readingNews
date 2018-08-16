@@ -1,0 +1,5 @@
+11.10.2017
+-created the links table
+Future work
+-get root_links from a file and process it
+-
