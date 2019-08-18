@@ -310,4 +310,34 @@ def genericLinks(html, url):
         links.append(full_link)
     links = sorted(set(links))
     return links
+def deskecoLinks(html, url):
+    pass 
+def lecongolaiscdLinks(html, url):
+    pass
+def laprosperiteLinks(html, url):
+    pass
+def mediacongoLinks(html, url):
+    pass
+def forumdesasLinks(html, url):
+    pass
+def theguardianLinks(html, url):
+    pass
+def financialtimesLinks(html, url):
+    pass
+def bloombergLinks(html, url):
+    pass
+def bloomberggoogleLinks(html, url):
+    pass
+def cnnLinks(html, url):
+    pass
+def france24Links(html, url):
+    pass
+def france24googleLinks(html, url):
+    pass
+def tv5mondeLinks(html, url):
+    pass
+def africanewsrdcLinks(html, url):
+    pass
+def topcongofmLinks(html, url):
+    pass
 

@@ -2,8 +2,8 @@ require "yaml"
 
 puts "write the file name in the format 2018-01-31.yml"
 filename = gets.chomp
-yaml_folder = "C:\\Users\\mazem\\myprojects-2018\\python\\readingNews\\assets\\content-yaml-files\\"
-image_folder = "C:\\Users\\mazem\\myprojects-2018\\python\\readingNews\\assets\\images\\"
+yaml_folder = "/mnt/volume_dielais/readingNews/assets/content_yaml_files/"
+image_folder = "/mnt/volume_dielais/readingNews/assets/images/"
 full_filename= yaml_folder + filename
 @articles = YAML.load(File.read(full_filename, :encoding => 'utf-8'))
 @size = @articles.length

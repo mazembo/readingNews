@@ -5,7 +5,7 @@ require "koala"
 #puts "write the file name in the format 2018-01-31.yml"
 date = Time.new
 date_formatted = date.strftime("%Y-%m-%d")
-filename = date_formatted + ".yml" 
+filename = "rdc-" + date_formatted + ".yml" 
 yaml_folder = "/mnt/volume_dielais/readingNews/assets/content_yaml_files/"
 image_folder = "/mnt/volume_dielais/readingNews/assets/images/"
 full_filename= yaml_folder + filename
@@ -30,10 +30,9 @@ end
   config.access_token_secret = "r0EX0CJLK1Um5BuX5e5f6pO09v5vFeEKZXUi0SsC4QZJ2"
 end
 @articles.each do |article|
-   @client_lecongolais.update_with_media("#{article[1]["tweet_message"]}", File.new(image_folder + "#{article[1]["picture"]}"))
+   @client_lecongolais.update_with_media("#{article[1]["tweet_message"]} + " " + #{article[1]["original_url"]} ", File.new(image_folder + "001_image.jpg"))
    sleep 5
-   @client_mazembo.update_with_media("#{article[1]["tweet_message"]}", File.new(image_folder + "#{article[1]["picture"]}"))
-   sleep 5
+   @client_mazembo.update_with_media("#{article[1]["tweet_message"]} + " " + #{article[1]["original_url"]} ", File.new(image_folder + "001_image.jpg"))
 end
 puts "You have Successfully tweeted a collection of #{@size} tweets"
 

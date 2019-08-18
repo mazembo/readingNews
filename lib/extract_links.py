@@ -2,19 +2,20 @@
 import requests
 import re
 import pickle
+import datetime
 
 # textfile = file('depth_1.txt','wt')
-print("Enter the URL you wish to crawl..")
-print('Usage  - "http://phocks.org/stumble/creepy/" <-- With the double quotes')
-myurl = input("@> ")
-root_url = myurl
-print("Enter the date for which to get the news..")
-print('Usage  - "2018/02/05"')
-date_published = input("@>")
+#print("Enter the URL you wish to crawl..")
+#print('Usage  - "http://phocks.org/stumble/creepy/" <-- With the double quotes')
+#myurl = input("@> ")
+root_url = "https://www.radiookapi.net"
+#print("Enter the date for which to get the news..")
+#print('Usage  - "2018/02/05"')
+date_published = datetime.datetime.now().strftime('%Y/%m/%d')
 date_formated = date_published.replace("/", "-")
-urls_folder = 'C:\\Users\\mazem\\myprojects-2018\\python\\readingNews\\assets\\urls-text-files\\'
+urls_folder = '/mnt/volume_dielais/readingNews/assets/urls_text_files/'
 filename = urls_folder + date_formated + '.txt'
-request = requests.get(myurl)
+request = requests.get(root_url)
 html = ""
 if request.status_code == 200:
     html = request.text

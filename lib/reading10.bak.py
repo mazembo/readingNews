@@ -11,7 +11,7 @@ import yaml
 import pickle
 import hashlib
 import YamlTomongo as ym
-import getlinkstest as gl
+import getlinks as gl
 import getcontent as gc
 from time import sleep
 import datetime
@@ -52,11 +52,6 @@ def readNewsRdcongo(country_name):
     rfi = str(list_of_sites[3])
     jeuneafrique = str(list_of_sites[4])
     benilubero = str(list_of_sites[5])
-    librebelgique = str(list_of_sites[6])
-    lemonde = str(list_of_sites[7])
-    voixamerique = str(list_of_sites[8])
-    lepotentiel = str(list_of_sites[9])
-    congoindependant = str(list_of_sites[10])
 
     # # We connect to grab the html and date_accessed of every site listed above
     try:
@@ -89,35 +84,6 @@ def readNewsRdcongo(country_name):
     except:
         print "there was a problem to connect to the site: %s" %benilubero
         pass
-    try:
-        librebelgique_html, librebelgique_date_accessed = gl.getHtml(librebelgique)
-    except:
-        print "there was a problem to connect to the site: %s" %librebelgique
-        pass
-    try:
-        lemonde_html, lemonde_date_accessed = gl.getHtml(lemonde)
-    except:
-        print "there was a problem to connect to the site: %s" %lemonde
-        pass
-
-    try:
-        voixamerique_html, voixamerique_date_accessed = gl.getHtml(voixamerique)
-    except:
-        print "there was a problem to connect to the site: %s" %voixamerique
-        pass
-    try:
-        lepotentiel_html, lepotentiel_date_accessed = gl.getHtml(lepotentiel)
-    except:
-        print "there was a problem to connect to the site: %s" %lepotentiel
-        pass
-    try:
-        congoindependant_html, congoindependant_date_accessed = gl.getHtml(congoindependant)
-    except:
-        print "there was a problem to connect to the site: %s" %congoindependant
-        pass
-
-    
-    
 
     # Getting list of urls of the site radiookapi.net
     radiookapi_date_published = gl.getDatetimeSlash()
@@ -168,84 +134,21 @@ def readNewsRdcongo(country_name):
         jeuneafrique_links = gl.jeuneafriqueLinks(jeuneafrique_html, jeuneafrique)
     except:
         pass
-    #for rfi 
+     #for rfi
 
     rfi_date_published = gl.getDatetimeSlash()
-    try: 
+    try:
         rfi_links = gl.rfiLinksDefault()
     except:
         pass
-   # for librebelgique  
-   
-    librebelgique_date_published = gl.getDatetimeSlash()
-    try:
-        librebelgique_links = gl.librebelgiqueLinksDefault(librebelgique_html, librebelgique_date_published)
-    except:
-        pass
-    # for lemonde.fr
-    lemonde_date_published = gl.getDatetimeSlash()
-    try:
-        lemonde_links = gl.lemondeLinksDefault(lemonde_html, lemonde_date_published)
-    except:
-        pass
-    # for voix de l amerique
-    voixamerique_date_published = gl.getDatetimeSlash()
-    try:
-        voixamerique_links = gl.voixameriqueLinksDefault(voixamerique_html, voixamerique_date_published)
-    except:
-        pass
 
-    # for lepotentiel 
-    lepotentiel_date_published = gl.getDatetimeSlash()
-    try:
-        lepotentiel_links = gl.lepotentielLinksDefault(lepotentiel_html, lepotentiel_date_published)
-    except:
-        pass
-
-    # for congoindependant 
-    congoindependant_date_published = gl.getDatetimeSlash()
-    try:
-        congoindependant_links = gl.congoindependantLinksDefault(congoindependant_html, congoindependant_date_published)
-    except:
-        pass
-
-    
-    
-    
-    
-    
-    
-    
     # print jeuneafrique_links
     for link in jeuneafrique_links:
         print link
-    for link in rfi_links:
-        print link
-
-    #print benilubero_html
-    print benilubero_links 
-    print librebelgique_links
-    for link in librebelgique_links:
-        print link
-    print lemonde_links
-    for link in lemonde_links:
-        print link
-
-
-    print voixamerique_links
-
-    print lepotentiel_links
-    for link in lepotentiel_links:
-        print link
-
-    print congoindependant_links
-    for link in congoindependant_links:
-        print link
-
 
     # creating a consolidated list of links
 
-    consolidated_links_list = radiookapi_links + politico_links + actualite_links + benilubero_links + jeuneafrique_links + rfi_links + librebelgique_links + lemonde_links + voixamerique_links + lepotentiel_links + congoindependant_links 
+    consolidated_links_list = radiookapi_links + politico_links + actualite_links + benilubero_links + jeuneafrique_links + rfi_links
     gc.write_links(output_filename, consolidated_links_list)
     print "the file has been created %s" %output_filename
     # writing the consolidated_links_list to a filege

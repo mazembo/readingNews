@@ -245,14 +245,14 @@ def readNewsRdcongo(country_name):
 
     # creating a consolidated list of links
 
-    consolidated_links_list = radiookapi_links + politico_links + actualite_links + benilubero_links + jeuneafrique_links + rfi_links + librebelgique_links + lemonde_links + voixamerique_links + lepotentiel_links + congoindependant_links 
-    gc.write_links(output_filename, consolidated_links_list)
-    print "the file has been created %s" %output_filename
+    #consolidated_links_list = radiookapi_links + politico_links + actualite_links + benilubero_links + jeuneafrique_links
+    #gc.write_links(output_filename, consolidated_links_list)
+    #print "the file has been created %s" %output_filename
     # writing the consolidated_links_list to a filege
 
     # Now getting the content and picture
-    published_date = datetime.datetime.now().strftime('%Y-%m-%d')    
-    yaml_file_articles = gc.process_list_urls_default(consolidated_links_list, published_date)
+    #published_date = datetime.datetime.now().strftime('%Y-%m-%d')    
+    #yaml_file_articles = gc.process_list_urls_default(consolidated_links_list, published_date)
 
 
 

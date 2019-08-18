@@ -16,11 +16,13 @@ import yaml
 import pickle
 import hashlib
 import YamlTomongo
+import datetime
+import getlinks as gl
 
-images_folder = "C:\\Users\\mazem\\myprojects-2018\\python\\readingNews\\assets\\images\\"
-yaml_folder = "C:\\Users\\mazem\\myprojects-2018\\python\\readingNews\\assets\\content-yaml-files\\"
-html_folder = "C:\\Users\\mazem\\myprojects-2018\\python\\readingNews\\assets\\html-files\\"
-urls_folder = 'C:\\Users\\mazem\\myprojects-2018\\python\\readingNews\\assets\\urls-text-files\\'
+images_folder = "/mnt/volume_dielais/readingNews/assets/images/"
+yaml_folder = "/mnt/volume_dielais/readingNews/assets/content_yaml_files/"
+html_folder = "/mnt/volume_dielais/readingNews/assets/html_files/"
+urls_folder = "/mnt/volume_dielais/readingNews/assets/urls_text_files/"
 
 def get_content(soup):
     title = soup.title.text
@@ -47,6 +49,9 @@ def download_image(images_url, url):
         img_url = images_url[0]
         file_name = hashlib.sha224(img_url).hexdigest() + ".jpg"
         file_name_full = images_folder + file_name
+        print img_url
+        if "photos." in img_url:
+            img_url = "https:" + img_url 
         urlretrieve(img_url, file_name_full)
         return file_name
 
@@ -137,17 +142,19 @@ def process_textfile(textfile, today_date):
 
     yaml_file_name = yaml_folder + yaml_file_name
     write_yaml(yaml_file_name, articles)
-    print "we are about to save the articles to MongoDB"
-    list_articles = YamlTomongo.dicToList(articles)
-    YamlTomongo.insertMultiple(list_articles, year, month, day)
-    print "the collection of articles has been saved to the MongoDB"
+    #print "we are about to save the articles to MongoDB"
+    #list_articles = YamlTomongo.dicToList(articles)
+    #YamlTomongo.insertMultiple(list_articles, year, month, day)
+    #print "the collection of articles has been saved to the MongoDB"
 
 # print (articles)
 # print len(articles)
 # print type(articles)
 #write_file(articles)
 def main():
-    process_textfile(sys.argv[1], sys.argv[2])
+    published_date = datetime.datetime.now().strftime('%Y-%m-%d')
+    date_text_file = published_date + ".txt"  
+    process_textfile(date_text_file, published_date)
 #this is the standard boilerplate that calls the main() function.
 # python 2018-01-31.txt 2018-01-31
 

@@ -1,10 +1,11 @@
+gem "mysql2", :version=>'=0.4.10'
 require "mysql2"
 require "active_record"
 ActiveRecord::Base.establish_connection(
   :adapter => "mysql2",
   :host => "localhost",
   :username => "root",
-  :password => "nditukulu77",
+  :password => "nd****9",
   :database => "newsapp"
   )
 class Article < ActiveRecord::Base

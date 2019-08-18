@@ -12,155 +12,13 @@ import re
 from time import sleep
 import requests
 
-def librebelgiqueLinks(url, date):
+def rfi(soup):
     # for the link: http://www.rfi.fr/afrique/
-   links = []
-   url = url 
-   root_url = ""
-   for i in range(1,331):
-       url = "http://www.rfi.fr/recherche/?Search[term]=rdc&Search[page]={}".format(i)
-       for l in re.findall('''href=["'](.[^"']+)["']''', html, re.I):
-           full_link = root_url + l
-           links.append(full_link)
-   return links
-       
-def librebelgiqueLinksDefault(html, date):
-    # for the link: http://www.rfi.fr/afrique/
-   links = []
-   html = html 
-   root_url = ""
-   
-   
-   for l in re.findall('''href=["'](.[^"']+)["']''', html, re.I):
-      links.append(l)
-   links = sorted(set(links))
-   librebelgique_links_final = []
-   for link in links:
-        match = re.search(r'/\d\d\d\d+/\w\w\w\w\w+', link)
-        if match:
-            librebelgique_links_final.append(link)
-        else:
-            pass
-   return librebelgique_links_final
-
-
-
-
-def lemondeLinks():
-    # for the link: http://www.rfi.fr/afrique/
-   links = []
-   root_url = "http://www.rfi.fr"
-   for i in range(1,331):
-       url = "http://www.rfi.fr/recherche/?Search[term]=rdc&Search[page]={}".format(i)
-       html, date_accessed = getHtml(url)
-       for l in re.findall('''href=["'](.[^"']+)["']''', html, re.I):
-           full_link = root_url + l
-           links.append(full_link)
-   return links
-       
-def lemondeLinksDefault(html, date):
-    # for the link: http://www.rfi.fr/afrique/
-   links = []
-   html = html 
-   root_url = "https://www.lemonde.fr"
-   for link in re.findall('''href=["'](.[^"']+)["']''', html, re.I):
-       if "2019" in link:
-           if link.startswith("http"):
-               links.append(link)
-           else:
-               full_link = root_url + link
-               links.append(full_link)
-   return links
-
-
-
-def voixameriqueLinks():
-    # for the link: http://www.rfi.fr/afrique/
-   links = []
-   root_url = "http://www.rfi.fr"
-   for i in range(1,331):
-       url = "http://www.rfi.fr/recherche/?Search[term]=rdc&Search[page]={}".format(i)
-       html, date_accessed = getHtml(url)
-       for l in re.findall('''js-href=["'](.[^"']+)["']''', html, re.I):
-           full_link = root_url + l
-           links.append(full_link)
-   return links
-       
-def voixameriqueLinksDefault(html, date):
-    # for the link: http://www.rfi.fr/afrique/
-   links = []
-   root_url = "https://www.voaafrique.com"
-   html = html
-   soup = getBeautifulSoup(html) 
-   nodes = soup.findAll("button", {"class": "btn btn--link ctc__button ctc__button--news"})
-   for node in nodes:
-       link = node.get("js-href")
-       links.append(link)
-   return links
-
-
-def lepotentielLinks():
-    # for the link: http://www.rfi.fr/afrique/
-   links = []
-   root_url = "http://www.rfi.fr"
-   for i in range(1,331):
-       url = "http://www.rfi.fr/recherche/?Search[term]=rdc&Search[page]={}".format(i)
-       html, date_accessed = getHtml(url)
-       for l in re.findall('''href=["'](.[^"']+)["']''', html, re.I):
-           full_link = root_url + l
-           links.append(full_link)
-   return links
-       
-def lepotentielLinksDefault(html, date):
-    # for the link: http://www.rfi.fr/afrique/
-   links = []
-   html = html 
-   root_url = "https://www.lepotentielonline.net"
-   for l in re.findall('''href=["'](.[^"']+)["']''', html, re.I):
-       full_link = l
-       if "2019" in full_link:
-           links.append(full_link)
-   return links
-
-def congoindependantLinks():
-    # for the link: http://www.rfi.fr/afrique/
-   links = []
-   root_url = "http://www.rfi.fr"
-   for i in range(1,331):
-       url = "http://www.rfi.fr/recherche/?Search[term]=rdc&Search[page]={}".format(i)
-       html, date_accessed = getHtml(url)
-       for l in re.findall('''href=["'](.[^"']+)["']''', html, re.I):
-           full_link = root_url + l
-           links.append(full_link)
-   return links
-       
-def congoindependantLinksDefault(html, date):
-    # for the link: http://www.rfi.fr/afrique/
-   links = []
-   html = html 
-   root_url = "https://www.congoindependant.com"
-   for link in re.findall('''href=["'](.[^"']+)["']''', html, re.I):
-       if "congoindependant" in link:
-            links.append(link)
-   new_links = []
-   for link in links:
-       if not link.__contains__("tag"):
-           new_links.append(link)
-   final_links = []
-   for link in new_links: 
-       if not (link.__contains__("category")):
-            final_links.append(link)
-   return final_links
-
-
-
-
-
-
-
-
-
-
+    links = []
+    for section in soup2.findAll("div", {"class" : "thumbNtitle"}):
+        for link in section.findAll("a"):
+             links.append (link.get("href"))
+    return links
 def rfiLinks():
     # for the link: http://www.rfi.fr/afrique/
    links = []
@@ -172,7 +30,7 @@ def rfiLinks():
            full_link = root_url + l
            links.append(full_link)
    return links
-       
+
 def rfiLinksDefault():
     # for the link: http://www.rfi.fr/afrique/
    links = []
@@ -184,6 +42,7 @@ def rfiLinksDefault():
        if "2019" in full_link:
            links.append(full_link)
    return links
+
 
 def jeuneAfrique(soup):
     # for the link: http://www.jeuneafrique.com/pays/rd-congo
@@ -310,4 +169,3 @@ def genericLinks(html, url):
         links.append(full_link)
     links = sorted(set(links))
     return links
-
