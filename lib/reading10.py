@@ -1,5 +1,5 @@
-
 # py -2 reading10.py rdc
+# encoding=utf8
 from bs4 import BeautifulSoup
 import urllib2
 import urllib
@@ -10,12 +10,13 @@ import sys
 import yaml
 import pickle
 import hashlib
-import YamlTomongo as ym
+#import YamlTomongo as ym
 import getlinkstest as gl
 import getcontent as gc
 from time import sleep
 import datetime
 import hashlib
+
 # consolidated_links_list = []
 # okapi_links_list = []
 # rfi_links_list = []
@@ -33,7 +34,7 @@ import hashlib
 def readNewsRdcongo(country_name):
     # Initializing a set of placeholders variables
     list_of_sites = []
-    urls_folder = '/mnt/volume_dielais/readingNews/assets/urls_text_files/'
+    urls_folder = '/var/jenkins_home/data/readingNewsCongo/assets/urls_text_files/'
     filename = urls_folder + country_name + ".txt"
     date_prefix = gl.getDatetimeLong()
     output_filename = urls_folder + date_prefix + '-' + country_name + '.txt'
@@ -209,18 +210,12 @@ def readNewsRdcongo(country_name):
     except:
         pass
 
-    
-    
-    
-    
-    
-    
-    
+   
     # print jeuneafrique_links
-    for link in jeuneafrique_links:
-        print link
-    for link in rfi_links:
-        print link
+    #for link in jeuneafrique_links:
+    #    print link
+    #for link in rfi_links:
+    #    print link
 
     #print benilubero_html
     print benilubero_links 
@@ -245,7 +240,7 @@ def readNewsRdcongo(country_name):
 
     # creating a consolidated list of links
 
-    consolidated_links_list = radiookapi_links + politico_links + actualite_links + benilubero_links + jeuneafrique_links + rfi_links + librebelgique_links + lemonde_links + voixamerique_links + lepotentiel_links + congoindependant_links 
+    consolidated_links_list = radiookapi_links + politico_links + actualite_links + benilubero_links + rfi_links + librebelgique_links + lemonde_links + voixamerique_links + lepotentiel_links + congoindependant_links 
     gc.write_links(output_filename, consolidated_links_list)
     print "the file has been created %s" %output_filename
     # writing the consolidated_links_list to a filege

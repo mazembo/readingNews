@@ -13,7 +13,7 @@ root_url = "https://www.radiookapi.net"
 #print('Usage  - "2018/02/05"')
 date_published = datetime.datetime.now().strftime('%Y/%m/%d')
 date_formated = date_published.replace("/", "-")
-urls_folder = '/mnt/volume_dielais/readingNews/assets/urls_text_files/'
+urls_folder = '/var/jenkins_home/data/readingNewsCongo/assets/urls_text_files/'
 filename = urls_folder + date_formated + '.txt'
 request = requests.get(root_url)
 html = ""

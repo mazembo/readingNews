@@ -8,7 +8,7 @@ date_formatted = date.strftime("%Y-%m-%d")
 filename = "rdc-" + date_formatted + ".yml" 
 yaml_folder = "/var/jenkins_home/data/readingNewsCongo/assets/content_yaml_files/"
 image_folder = "/var/jenkins_home/data/readingNewsCongo/assets/images/"
-full_filename= yaml_folder + filename
+full_filename = "/var/jenkins_home/data/readingNewsCongo/assets/content_yaml_files/rdc-2019-09-12.yml"
 @articles = YAML.load(File.read(full_filename, :encoding => 'utf-8'))
 @size = @articles.length
 
@@ -34,14 +34,12 @@ end
         @client_lecongolais.update_with_media("#{article[1]["tweet_message"]}", File.new(image_folder + "#{article[1]["picture"]}"))
    rescue
         puts "there was an error"
-	puts "#{article[1]["tweet_message"]}" 
    end
    sleep 5
    begin
         @client_mazembo.update_with_media("#{article[1]["tweet_message"]}", File.new(image_folder + "#{article[1]["picture"]}"))
    rescue
         puts "there was an error"
-	puts "#{article[1]["tweet_message"]}"
    end
    sleep 5
 end

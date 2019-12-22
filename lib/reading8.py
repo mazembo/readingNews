@@ -15,14 +15,14 @@ import sys
 import yaml
 import pickle
 import hashlib
-import YamlTomongo
+#import YamlTomongo
 import datetime
 import getlinks as gl
 
-images_folder = "/mnt/volume_dielais/readingNews/assets/images/"
-yaml_folder = "/mnt/volume_dielais/readingNews/assets/content_yaml_files/"
-html_folder = "/mnt/volume_dielais/readingNews/assets/html_files/"
-urls_folder = "/mnt/volume_dielais/readingNews/assets/urls_text_files/"
+images_folder = "/var/jenkins_home/data/readingNewsCongo/assets/images/"
+yaml_folder = "/var/jenkins_home/data/readingNewsCongo/assets/content_yaml_files/"
+html_folder = "/var/jenkins_home/data/readingNewsCongo/assets/html_files/"
+urls_folder = "/var/jenkins_home/data/readingNewsCongo/assets/urls_text_files/"
 
 def get_content(soup):
     title = soup.title.text
@@ -49,7 +49,7 @@ def download_image(images_url, url):
         img_url = images_url[0]
         file_name = hashlib.sha224(img_url).hexdigest() + ".jpg"
         file_name_full = images_folder + file_name
-        print img_url
+        #print img_url
         if "photos." in img_url:
             img_url = "https:" + img_url 
         urlretrieve(img_url, file_name_full)
@@ -105,40 +105,45 @@ def process_textfile(textfile, today_date):
     yaml_file_name = date_published + ".yml"
     i = 0
     for item in new_itemlist:
-        print item
-        url = item
-        i += 1
-        article = hashlib.sha224(url).hexdigest()
+        try:
+            print item
+            url = item
+            i += 1
+            article = hashlib.sha224(url).hexdigest()
 
     # This packages the request (it doesn't make it)
-        request = urllib2.Request(url, headers={'User-Agent' : "Magic Browser"})
+            request = urllib2.Request(url, headers={'User-Agent' : "Magic Browser"})
     # Sends the request and catches the response
-        response = urllib2.urlopen(request)
+            response = urllib2.urlopen(request)
     #Extracts the response
-        html = response.read()
+            html = response.read()
     # it is important to have the date we have accessed this data
-        date_accessed = response.info()['date']
+            date_accessed = response.info()['date']
     # Let us write the html to file locally for archiving purposes
 
     # Below is the format of the filename of the html data.
-        html_file_name_end = date_published + "-%s" %i + ".html"
-        html_file_name = html_folder + html_file_name_end
+            html_file_name_end = date_published + "-%s" %i + ".html"
+            html_file_name = html_folder + html_file_name_end
     # take it to BeautifulSoup
-        soup = BeautifulSoup(html, "html.parser")
+            soup = BeautifulSoup(html, "html.parser")
     # Now get all the images, download them and pass a list of them
     #images = get_images(soup)
     # Now we get the most important pieces of information from the beautifulsoup object
-        date_infos = soup.findAll("div", {"class" : "pane-content"})[2].p.text
-        images_url = []
-        images_url = get_images_okapi(soup)
-        image_filename = download_image(images_url, url)
-        title, body, short_message, tweet_message = get_content(soup)
-        title, body, short_message, tweet_message = clean_up(title, body, short_message, tweet_message)
+            #date_infos = soup.findAll("div", {"class" : "pane-content"})[2].p.text
+            images_url = []
+            images_url = get_images_okapi(soup)
+            image_filename = download_image(images_url, url)
+            title, body, short_message, tweet_message = get_content(soup)
+            title, body, short_message, tweet_message = clean_up(title, body, short_message, tweet_message)
 
     # Now we get the infos formated as we would like it
-        formated_article = get_formated_article(title, body, short_message, tweet_message, date_accessed, date_published, url, image_filename)
-        articles[article] = formated_article
-        write_html(html_file_name, html)
+            formated_article = get_formated_article(title, body, short_message, tweet_message, date_accessed, date_published, url, image_filename)
+            articles[article] = formated_article
+            write_html(html_file_name, html)
+        except:
+            print("Oops!",sys.exc_info()[0],"occured.")
+            pass
+
 
     yaml_file_name = yaml_folder + yaml_file_name
     write_yaml(yaml_file_name, articles)

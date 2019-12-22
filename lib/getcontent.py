@@ -1,3 +1,4 @@
+# encoding=utf8
 import pickle
 import hashlib
 from bs4 import BeautifulSoup
@@ -8,22 +9,26 @@ import urlparse
 import io
 import sys
 import yaml
-from time import sleep 
+from time import sleep
 
-images_folder = "/mnt/volume_dielais/readingNews/assets/images/"
-html_folder = "/mnt/volume_dielais/readingNews/assets/html_files/"
-yaml_folder = "/mnt/volume_dielais/readingNews/assets/content_yaml_files/"
-urls_folder = "/mnt/volume_dielais/readingNews/assets/urls_text_files/"
+
+images_folder = "/var/jenkins_home/data/readingNewsCongo/assets/images/"
+html_folder = "/var/jenkins_home/data/readingNewsCongo/assets/html_files/"
+yaml_folder = "/var/jenkins_home/data/readingNewsCongo/assets/content_yaml_files/"
+urls_folder = "/var/jenkins_home/data/readingNewsCongo/assets/urls_text_files/"
 
 def radiookapiContent(soup):
     body = soup.findAll("div", {"class" : "inside panels-flexible-row-inside panels-flexible-row-3-3-inside clearfix"})
     body = body[0].text
+    body = body.encode('utf-8')
+    signature = " #RDC @LecongolaisNet"
     short_message = body + signature
     return body, short_message
 def get_content_default(soup):
     title = soup.title.text
+    title = title.encode('utf-8')
     signature = " #RDC @LecongolaisNet"
-    tweet_message = title
+    tweet_message = title + signature 
     #date_published= [meta.get('content') for meta in soup.find_all('meta', itemprop='datePublished')]
     #body = soup.findAll("div", {"class" : "inside panels-flexible-row-inside panels-flexible-row-3-3-inside clearfix"})
     #body = body[0].text
@@ -113,25 +118,34 @@ def process_list_urls_default(list_urls, today_date):
             url = item
             i += 1
             article = hashlib.sha224(url).hexdigest()
+            print("hashlib works")
 
     # This packages the request (it doesn't make it)
             request = urllib2.Request(url, headers={'User-Agent' : "Magic Browser"})
     # Sends the request and catches the response
             response = urllib2.urlopen(request)
+            print("the request was made")
     #Extracts the response
             html = response.read()
+            print("I have read the response")
     # it is important to have the date we have accessed this data
             date_accessed = response.info()['date']
+            print("I have read the date")
     # Let us write the html to file locally for archiving purposes
 
     # Below is the format of the filename of the html data.
             html_file_name_end = "rdc-" + date_published + "-%s" %i + ".html"
+            print("I have created the file end")
             html_file_name = html_folder + html_file_name_end
+            print("I have created the filename")
     # take it to BeautifulSoup
             soup = BeautifulSoup(html, "html.parser")
+            print("I have the soup")
         #date_infos = soup.findAll("div", {"class" : "pane-content"})[2].p.text
-            image_filename = get_images_default
+            image_filename = get_images_default()
+            print(image_filename)
             title, tweet_message = get_content_default(soup)
+            print(title)
         #title, body, short_message, tweet_message = clean_up(title, body, short_message, tweet_message)
 
     # Now we get the infos formated as we would like it

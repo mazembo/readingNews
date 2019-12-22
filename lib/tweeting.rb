@@ -6,8 +6,8 @@ require "koala"
 date = Time.new
 date_formatted = date.strftime("%Y-%m-%d")
 filename = date_formatted + ".yml" 
-yaml_folder = "/mnt/volume_dielais/readingNews/assets/content_yaml_files/"
-image_folder = "/mnt/volume_dielais/readingNews/assets/images/"
+yaml_folder = "/var/jenkins_home/data/readingNewsCongo/assets/content_yaml_files/"
+image_folder = "/var/jenkins_home/data/readingNewsCongo/assets/images/"
 full_filename= yaml_folder + filename
 @articles = YAML.load(File.read(full_filename, :encoding => 'utf-8'))
 @size = @articles.length
@@ -30,9 +30,19 @@ end
   config.access_token_secret = "r0EX0CJLK1Um5BuX5e5f6pO09v5vFeEKZXUi0SsC4QZJ2"
 end
 @articles.each do |article|
-   @client_lecongolais.update_with_media("#{article[1]["tweet_message"]}", File.new(image_folder + "#{article[1]["picture"]}"))
+   begin
+   	@client_lecongolais.update_with_media("#{article[1]["tweet_message"]}", File.new(image_folder + "#{article[1]["picture"]}"))
+   rescue
+	puts "there was an error"
+	puts "#{article[1]["tweet_message"]}"
+   end 
    sleep 5
-   @client_mazembo.update_with_media("#{article[1]["tweet_message"]}", File.new(image_folder + "#{article[1]["picture"]}"))
+   begin
+   	@client_mazembo.update_with_media("#{article[1]["tweet_message"]}", File.new(image_folder + "#{article[1]["picture"]}"))
+   rescue
+	puts "there was an error"
+	puts "#{article[1]["tweet_message"]}"
+   end
    sleep 5
 end
 puts "You have Successfully tweeted a collection of #{@size} tweets"
