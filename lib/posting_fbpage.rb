@@ -1,10 +1,15 @@
 require "yaml"
 require "koala"
 access_token = YAML.load(File.read("access-data.yml"))
-@articles = YAML.load(File.read("2017-02-10.yml"))
 user_token = access_token["user_token"]
 lecongolais = access_token["lecongolais"]
-
+date = Time.new
+date_formatted = date.strftime("%Y-%m-%d")
+filename = date_formatted + ".yml" 
+yaml_folder = "/var/jenkins_home/data/readingNewsCongo/assets/content_yaml_files/"
+image_folder = "/var/jenkins_home/data/readingNewsCongo/assets/images/"
+full_filename= yaml_folder + filename
+@articles = YAML.load(File.read(full_filename, :encoding => 'utf-8'))
 # posting to my page lecongolais.net
 @custom_message = "lecongolais.net --Aimez notre page facebook www.facebook.com/lecongolais.net/ --Nous suivre sur Twitter @LecongolaisNet"
 
