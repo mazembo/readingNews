@@ -15,19 +15,19 @@ full_filename = "/var/jenkins_home/data/readingNewsCongo/assets/content_yaml_fil
 # Client for lecongolais.ne
 
 @client_lecongolais = Twitter::REST::Client.new do |config|
-  config.consumer_key        = "hF5tiIO8uRHa7qPWdVEmAoMMv"
-  config.consumer_secret     = "uskmD4n5SWXNYaXwq1RksDzLG8v2vwLbGVodymNkXqEbowFzw6"
-  config.access_token        = "3190485058-AuMa7qDLvJIFKqahsCNS5buZKYthMklTZUVmxtY"
-  config.access_token_secret = "7ihVPRU3xXIYYFvlYvZAUl7SCthocIm7g34lv7ibXaL8U"
+  config.consumer_key        = ""
+  config.consumer_secret     = "u"
+  config.access_token        = "3"
+  config.access_token_secret = "7"
 end
 #
 # #client for Dr Mazembo Mavungu account
 #
 @client_mazembo = Twitter::REST::Client.new do |config|
-  config.consumer_key        = "pjq2CgyrFUMNNBx7V6UIUFZnI"
-  config.consumer_secret     = "dcaoqVVV53qgD3ag50e82qfGRzBdevTPeZ6pkVAnC9PfoXljE7"
-  config.access_token        = "69027768-a7dk65Qedsaad0JKEUtMmJAVuaeaN81YMFNC1FuYx"
-  config.access_token_secret = "r0EX0CJLK1Um5BuX5e5f6pO09v5vFeEKZXUi0SsC4QZJ2"
+  config.consumer_key        = "p"
+  config.consumer_secret     = "d"
+  config.access_token        = ""
+  config.access_token_secret = ""
 end
 @articles.each do |article|
    begin
