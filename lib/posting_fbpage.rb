@@ -18,7 +18,7 @@ full_filename= yaml_folder + filename
    begin
       short_message = article[1]["tweet_message"] + " " + @custom_message
       @graph_page.put_picture("#{article[1]["picture"]}", {:message => short_message})
-      sleep 60
+      sleep 5
    rescue
      puts "There was a problem trying to post to the Lecongolais Page"
      exit
