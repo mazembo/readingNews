@@ -1,0 +1,12 @@
+https://dzone.com
+https://www.digitalocean.com/community/tutorials 
+https://content.pivotal.io/practitioners
+https://content.pivotal.io/tech-tutorials
+https://www.cncf.io/category/blog/ 
+https://www.cncf.io/newsroom/blog/
+https://thenewstack.io/
+https://developers.redhat.com/blog/
+https://www.oreilly.com/topics/operations?utm_medium=email&utm_source=topic+optin&utm_campaign=awareness&utm_content=20190617+sysops+nl&mkt_tok=eyJpIjoiTkRVMk1XRXlPREJpTVdNMyIsInQiOiJyclJnbDZaM20yZE56NnRSK3MzQ1I1U2h0bnZuU0JNN3orTzRkenN4UUkrcmp5Vytta25nOXZYR1owZFhXM3F4K1VjMUtqMnh5ekVHQm1VQ1JyXC9HaUVEUFVpSGhIWUw1bSs1ZktEOGVNd0VvcDNTWW9Td1JcL1wvQ0tUdXhjZzZLaSJ9
+https://www.oreilly.com/topics/operations
+https://news.microsoft.com/fr-fr/ 
+https://news.microsoft.com/
