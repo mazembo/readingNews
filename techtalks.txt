@@ -1,0 +1,7 @@
+https://aws.amazon.com/events/online-tech-talks/?nc2=h_ql_ev_ol&trk=el_a131L0000058PvNQAU&trkCampaign=WEBINARSERIES&sc_channel=el&sc_campaign=pac_2018-2019_exlinks_navbar_OTT_evergreen&sc_outcome=Product_Adoption_Campaigns&sc_geo=NAMER&sc_country=mult&events-master-ott.sort-by=item.additionalFields.startDateTime&events-master-ott.sort-order=asc
+https://aws.amazon.com/events/?nc2=h_ql_ev_all
+https://cloud.google.com/events/
+https://resource.alibabacloud.com/event/index?spm=a2c65.11461478.0.0.24ba53550zqXkh
+https://commons.openshift.org 
+
+
